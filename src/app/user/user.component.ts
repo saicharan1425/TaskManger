@@ -1,4 +1,4 @@
-import { Component, computed, input, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { DUMMY_USERS } from '../users';
 
@@ -12,20 +12,25 @@ import { DUMMY_USERS } from '../users';
 })
 export class UserComponent {
 
- /*   @Input() avatar!:string;
-  @Input() name!:string;
+    @Input({required: true}) avatar!:string;
+  @Input({required: true}) name!:string;
 
  get getImage(){
   return 'assets/users/'+ this.avatar;
  }
- */
 
- avatar = input.required<string>();
- name = input.required<string>();
+// Signals -------
+//  avatar = input.required<string>();
+//  name = input.required<string>();
 
-  imagePath = computed(()=> {
-    return 'assets/users/'+this.avatar();
-  })
+//   imagePath = computed(()=> {
+//     return 'assets/users/'+this.avatar();
+//   })
+// signal end --------
+
+    get imagePath(){
+      return 'assets/users/' + this.avatar;
+    }
 
  onClickbtn(){
 
