@@ -13,6 +13,10 @@ import { DUMMY_USERS } from './users';
 export class AppComponent {
 
   users=DUMMY_USERS;
+  userId!: string;
 
+onUserSelect(id: string){
+  this.userId = id;
 
+}
 }
