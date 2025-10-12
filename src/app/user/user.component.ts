@@ -1,24 +1,27 @@
 import { Component, EventEmitter, Input, Output, output } from '@angular/core';
+import { User } from './user.model';
+import { UiComponent } from "../shared/ui/ui.component";
 
-import { DUMMY_USERS } from '../users';
+
 
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [UiComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
 
-    @Input({required: true}) avatar!:string;
-  @Input({required: true}) name!:string;
-  @Input({required: true}) id!:string;
-  @Output() onClick = new EventEmitter;
+  @Input({required: true}) user! : User;
+  @Input() selected!:boolean;
+
+  @Output() onClick = new EventEmitter<string>();
+    @Output() select = new EventEmitter<string>();
 
  get getImage(){
-  return 'assets/users/'+ this.avatar;
+  return 'assets/users/'+ this.user.avatar;
  }
 
 // Signals -------
@@ -28,13 +31,19 @@ export class UserComponent {
 //   imagePath = computed(()=> {
 //     return 'assets/users/'+this.avatar();
 //   })
+// onClick = output<string>();
 // signal end --------
 
     get imagePath(){
-      return 'assets/users/' + this.avatar;
+      return 'assets/users/' + this.user.avatar;
     }
 
  onClickbtn(){
-  this.onClick.emit(this.name);
+  this.onClick.emit(this.user.name);
  }
+
+ selectUserId(){
+  this.select.emit(this.user.id);
+ }
+
 }

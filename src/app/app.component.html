@@ -2,26 +2,18 @@
 
 <main>
   <ul id="users">
-    <li>
-      <app-user [id]="users[0].id" [avatar]="users[0].avatar" [name]="users[0].name"  (onClick)="onUserSelect($event)"/>
+    @for(profile of users ; track profile.id){
+  <li>
+      <app-user [user]="profile" [selected]="userId === profile.id" (select)="onSelectUserId($event)" (onClick)="onUserSelect($event)"  />
     </li>
-
-    <li>
-      <app-user [id]="users[1].id" [avatar]="users[1].avatar" [name]="users[1].name" (onClick)="onUserSelect($event)" />
-
-    </li>
-
-    <li>
-      <app-user [id]="users[2].id" [avatar]="users[2].avatar" [name]="users[2].name" (onClick)="onUserSelect($event)"/>
-
-    </li>
-
-    <li>
-      <app-user [id]="users[3].id" [avatar]="users[3].avatar" [name]="users[3].name" (onClick)="onUserSelect($event)" />
-
-    </li>
+    }
   </ul>
-  <div> You have selected  {{userId}}</div>
+  @if(userName){
+     <app-tasks [userId]="selectedUser.id" [name]="userName"></app-tasks>
+  }@else{
+    <p>Select a User to see their Tasks!</p>
+  }
+
 </main>
 
 
